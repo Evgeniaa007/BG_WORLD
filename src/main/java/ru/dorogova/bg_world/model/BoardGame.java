@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -33,7 +34,16 @@ public class BoardGame {
      */
     @Column(name = "added_to_collection")
     private LocalDate gettingDate = LocalDate.now();
-
-
+    /**
+     * связь - несколько настольных игр у одного юзера
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    /**
+     * Одна настольная игра может иметь несколько партий
+     */
+    @OneToMany(mappedBy = "boardgames", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Session> sessions;
 
 }
