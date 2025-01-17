@@ -11,9 +11,11 @@ public interface BoardGameService {
 
     List<BoardGame> getAllBoardGames();
 
+    List<BoardGame> getByOwner(Long id);
+
     Optional<BoardGame> getBGById(Long id);
 
-    BoardGame updateBoardGame (Long id, BoardGame bg);
+    BoardGame editBoardGame (Long id, BoardGame bg);
 
     void deleteBoardGame (Long id);
 

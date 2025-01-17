@@ -1,16 +1,17 @@
-package ru.dorogova.bg_world.service;
+package ru.dorogova.bg_world.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.repository.BoardGameRepository;
+import ru.dorogova.bg_world.service.BoardGameService;
 
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class BoardGameServiceImpl implements BoardGameService{
+public class BoardGameServiceImpl implements BoardGameService {
     /**
      * Интерфейс, позволяющий работать с данными
      */
@@ -32,6 +33,11 @@ public class BoardGameServiceImpl implements BoardGameService{
         return bgRepository.findAll();
     }
 
+    @Override
+    public List<BoardGame> getByOwner(Long id) {
+        return bgRepository.getByOwner(id);
+    }
+
     /**
      * Поиск настольной игры по её идентификатору
      */
@@ -47,7 +53,7 @@ public class BoardGameServiceImpl implements BoardGameService{
      * @return настольная игра с обновленной информацией
      */
     @Override
-    public BoardGame updateBoardGame(Long id, BoardGame bg) {
+    public BoardGame editBoardGame(Long id, BoardGame bg) {
         Optional<BoardGame> optionalBG = bgRepository.findById(id);
         if(optionalBG.isPresent()){
             BoardGame boardGame = optionalBG.get();

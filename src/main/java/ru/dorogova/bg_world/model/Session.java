@@ -19,6 +19,13 @@ public class Session {
     @Column(nullable = false)
     private String bgName;
     /**
+     * Владелец настольной игры
+     */
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+    /**
      * Дата проведения партии
      */
     @Column(nullable = false)
@@ -38,12 +45,7 @@ public class Session {
      */
     @Column(nullable = false)
     private String impressions;
-    /**
-     * У одной настольной игры может быть несколько партий
-     */
-    @ManyToOne
-    @JoinColumn(name = "bd_id", nullable = false)
-    private BoardGame boardGame;
+
 
 
 }
