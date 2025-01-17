@@ -10,5 +10,5 @@ public interface BoardGameRepository extends JpaRepository<BoardGame, Long> {
      * Метод, позволяющий вывести список игр, которые
      * принадлежат определенному пользователю в соответствии с его ID
      */
-    List<BoardGame> getByOwner(Long ownerId);
+    List<BoardGame> getByOwner(String ownerName);
 }

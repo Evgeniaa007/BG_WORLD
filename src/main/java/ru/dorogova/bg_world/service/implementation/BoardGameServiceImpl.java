@@ -34,8 +34,8 @@ public class BoardGameServiceImpl implements BoardGameService {
     }
 
     @Override
-    public List<BoardGame> getByOwner(Long id) {
-        return bgRepository.getByOwner(id);
+    public List<BoardGame> getByOwner(String name) {
+        return bgRepository.getByOwner(name);
     }
 
     /**

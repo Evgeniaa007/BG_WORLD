@@ -11,7 +11,7 @@ public interface BoardGameService {
 
     List<BoardGame> getAllBoardGames();
 
-    List<BoardGame> getByOwner(Long id);
+    List<BoardGame> getByOwner(String name);
 
     Optional<BoardGame> getBGById(Long id);
 
