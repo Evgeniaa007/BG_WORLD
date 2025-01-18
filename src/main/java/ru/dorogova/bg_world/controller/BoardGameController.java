@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.service.implementation.BoardGameServiceImpl;
+import ru.dorogova.bg_world.service.implementation.SessionServiceImpl;
 import ru.dorogova.bg_world.service.implementation.UserServiceImpl;
 
 import java.util.List;
@@ -15,16 +16,21 @@ import java.util.List;
 public class BoardGameController {
 
     private final BoardGameServiceImpl bgService;
+
+    private final SessionServiceImpl sessionService;
+
     private final UserServiceImpl userService;
 
-    public BoardGameController(BoardGameServiceImpl bgService, UserServiceImpl userService) {
+    public BoardGameController(BoardGameServiceImpl bgService,
+                               SessionServiceImpl sessionService, UserServiceImpl userService) {
         this.bgService = bgService;
+        this.sessionService = sessionService;
         this.userService = userService;
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<List<BoardGame>> getUserGames(@PathVariable String name) {
-        return new ResponseEntity<>(bgService.getByOwner(name), HttpStatus.OK);
+    public ResponseEntity<List<BoardGame>> getUserGames(@PathVariable String userName) {
+        return new ResponseEntity<>(bgService.getByUserName(userName), HttpStatus.OK);
     }
 
     @PostMapping
@@ -44,10 +50,4 @@ public class BoardGameController {
         return ResponseEntity.ok().build();
     }
 }
-
-
-
-
-
-
 

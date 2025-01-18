@@ -17,6 +17,7 @@ public class BoardGameServiceImpl implements BoardGameService {
      */
     private final BoardGameRepository bgRepository;
 
+
     /**
      * Добавление новой настольной игры в каталог
      */
@@ -34,15 +35,16 @@ public class BoardGameServiceImpl implements BoardGameService {
     }
 
     @Override
-    public List<BoardGame> getByOwner(String name) {
-        return bgRepository.getByOwner(name);
+    public List<BoardGame> getByUserName(String userName) {
+
+        return bgRepository.getByUserName(userName);
     }
 
     /**
      * Поиск настольной игры по её идентификатору
      */
     @Override
-    public Optional<BoardGame> getBGById(Long id) {
+    public Optional<BoardGame> getBoardGameById(Long id) {
         return bgRepository.findById(id);
     }
 
@@ -59,7 +61,7 @@ public class BoardGameServiceImpl implements BoardGameService {
             BoardGame boardGame = optionalBG.get();
             boardGame.setTitle(bg.getTitle());
             boardGame.setGettingDate(bg.getGettingDate());
-            boardGame.setCategory(bg.getCategory());
+            boardGame.setGenre(bg.getGenre());
             return bgRepository.save(boardGame);
         }
         else {

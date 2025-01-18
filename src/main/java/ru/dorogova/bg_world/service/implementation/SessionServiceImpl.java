@@ -1,12 +1,16 @@
 package ru.dorogova.bg_world.service.implementation;
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.Session;
 import ru.dorogova.bg_world.repository.SessionRepository;
 import ru.dorogova.bg_world.service.SessionService;
 
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
+@Service
 public class SessionServiceImpl implements SessionService {
 
     SessionRepository sessionRepository;
@@ -20,11 +24,11 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> getAllSessions() {
         return sessionRepository.findAll();
     }
-
+/*
     @Override
-    public List<Session> getSessionsByUser(Long id) {
-        return sessionRepository.getSessionsByUser(id);
-    }
+    public List<Session> getSessionsByUserId(Long id) {
+        return sessionRepository.getSessionsByUserId(id);
+    }*/
 
     @Override
     public Optional<Session> getSessionById(Long id) {
@@ -33,7 +37,19 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session editSession(Long id, Session session) {
-        return null;
+        Optional<Session> optionalSession = sessionRepository.findById(id);
+        if(optionalSession.isPresent()){
+            Session s = optionalSession.get();
+            s.setBgName(session.getBgName());
+            s.setSessionDate(session.getSessionDate());
+            s.setPlayersAmount(session.getPlayersAmount());
+            s.setWinner(session.getWinner());
+            s.setImpressions(session.getImpressions());
+            return sessionRepository.save(session);
+        }
+        else {
+            throw new IllegalArgumentException("Запрашиваемая сессия не существует.");
+        }
     }
 
     @Override

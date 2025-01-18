@@ -3,6 +3,7 @@ package ru.dorogova.bg_world.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,7 +20,7 @@ public class User {
     /**
      * имя пользователя
      */
-    @Column(nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
     /**
      * пароль
@@ -30,9 +31,17 @@ public class User {
      * определяет связь с настольными играми. т.е.
      * один пользователь может иметь несколько игр
      */
+    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<BoardGame> boardGames = new ArrayList<>();
+/*
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BoardGame> boardGameList;
+    private List<Session> sessions;
 
-
-
+*/
+    public void addBoardGame(BoardGame boardGame) {
+        boardGame.setUser(this); // Установка обратной связи
+        this.boardGames.add(boardGame);
+    }
 }

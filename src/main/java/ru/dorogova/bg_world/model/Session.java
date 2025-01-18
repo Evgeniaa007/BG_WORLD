@@ -16,36 +16,44 @@ public class Session {
     /**
      * Название настольной игры
      */
-    @Column(nullable = false)
+    @Column(name = "BoardGameName")
     private String bgName;
-    /**
-     * Владелец настольной игры
-     */
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
 
     /**
      * Дата проведения партии
      */
-    @Column(nullable = false)
+    @Column(name = "sessionDate (DD-MM-YYYY)")
     private LocalDate sessionDate;
     /**
      * Кол-во игроков. участвующих в партии
      */
-    @Column(nullable = false)
+    @Column(name = "playersAmount")
     private int playersAmount;
     /**
      * Победитель
      */
-    @Column(nullable = false)
+    @Column(name = "winner")
     private String winner;
     /**
      * Впечатления (комментарии) к партии
      */
-    @Column(nullable = false)
+    @Column(name = "impressions")
     private String impressions;
 
+    @ManyToOne
+    @JoinColumn(name = "boardGame_id")
+    private BoardGame boardGame;
+
+
+    /**
+     * Владелец настольной игры
+     */
+    /*
+    @ManyToOne
+    @JoinColumn(name = "users_id", nullable = false)
+    private User user;
+
+*/
 
 
 }

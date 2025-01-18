@@ -3,7 +3,6 @@ package ru.dorogova.bg_world.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -20,30 +19,40 @@ public class BoardGame {
     /**
      * Название игры
      */
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
     /**
      * Жанр игры
      */
-    @Column(name = "category", nullable = false)
-    private String category;
+    @Column(name = "genre")
+    private String genre;
 
     /**
      * Дата появления игры в коллекции
      */
-    @Column(name = "added_to_collection")
-    private LocalDate gettingDate = LocalDate.now();
-    /**
-     * связь - несколько настольных игр у одного юзера
-     */
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "added_to_collection (DD-MM-YYYY)")
+    private String gettingDate;
+
     /**
      * Одна настольная игра может иметь несколько партий
      */
-    @OneToMany(mappedBy = "boardgames", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "boardGame", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Session> sessions;
+
+    /**
+     * связь - несколько настольных игр у одного юзера
+     */
+    //@ManyToOne
+    //@JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public void addSession(Session session) {
+        session.setBoardGame(this); // Установка обратной связи
+        this.sessions.add(session);
+    }
 
 }

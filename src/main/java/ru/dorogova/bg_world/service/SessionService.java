@@ -12,7 +12,8 @@ public interface SessionService {
 
     List<Session> getAllSessions();
 
-    List<Session> getSessionsByUser(Long id);
+   // List<Session> getSessionsByUserId(Long id);
+
 
     Optional<Session> getSessionById(Long id);
 
