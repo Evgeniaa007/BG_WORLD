@@ -21,7 +21,7 @@ public class BoardGameServiceImpl implements BoardGameService {
 
 
     /**
-     * Добавление новой настольной игры в каталог
+     * Добавление новой настольной игры в коллекцию
      */
     @Override
     public BoardGame addBoardGame(BoardGame boardGame) {
@@ -36,6 +36,11 @@ public class BoardGameServiceImpl implements BoardGameService {
         return bgRepository.findAll();
     }
 
+    /**
+     * Получение списка настольных игр пользователя
+     * @param userName имя пользователя
+     * @return список настольных игр пользователя
+     */
     @Override
     public List<BoardGame> getBoardGamesByUserName(String userName) {
         User user = userService.findByName(userName);
@@ -57,7 +62,7 @@ public class BoardGameServiceImpl implements BoardGameService {
     /**
      * Метод внесения изменений в запись о настольной игре
      * @param id по которому мы ищем игру для внесения изменений
-     * @param bg данные для обновления
+     * @param bg данные для внесения изменений
      * @return настольная игра с обновленной информацией
      */
     @Override

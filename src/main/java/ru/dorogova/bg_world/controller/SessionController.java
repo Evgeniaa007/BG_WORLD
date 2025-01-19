@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.Session;
+import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.service.implementation.BoardGameServiceImpl;
 import ru.dorogova.bg_world.service.implementation.SessionServiceImpl;
 import ru.dorogova.bg_world.service.implementation.UserServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/sessions")
@@ -29,10 +31,23 @@ public class SessionController {
         return new ResponseEntity<>(sessionService.getAllSessions(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Session> addBoardGame(@RequestBody Session session) {
-        sessionService.addSession(session);
-        return new ResponseEntity<>(session, HttpStatus.CREATED);
+    @GetMapping("/{id}/bgSessions")
+    public ResponseEntity<List<Session>> getBoardGameSessions(@PathVariable Long id) {
+        List<Session> sessions = sessionService.getBoardGameSessions(id);
+        return new ResponseEntity<>(sessions, HttpStatus.OK);
+    }
+
+    @PostMapping("/{boardGameId}")
+    public ResponseEntity<Session> addSession(@RequestBody Session session, @PathVariable Long boardGameId) {
+        Optional<BoardGame> optionalBoardGame = boardGameService.getBoardGameById(boardGameId);
+        if (optionalBoardGame.isPresent()) {
+            BoardGame boardGame = optionalBoardGame.get();
+            boardGame.addSession(session);
+            sessionService.addSession(session);
+            return new ResponseEntity<>(session, HttpStatus.CREATED);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PutMapping("/{id}")
@@ -42,8 +57,20 @@ public class SessionController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSession(@PathVariable Long id) {
-        sessionService.deleteSession(id);
-        return ResponseEntity.ok().build();
+        Optional<Session>optionalSession = sessionService.getSessionById(id);
+        if(optionalSession.isPresent()){
+            Session session = optionalSession.get();
+            BoardGame boardGame = session.getBoardGame();
+            if(boardGame != null){
+                boardGame.getSessions().remove(session);
+            }
+            sessionService.deleteSession(id);
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
 }

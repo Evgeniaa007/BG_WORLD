@@ -16,9 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-//        if (user.getName() == null || user.getName().isEmpty()) {
-//            throw new IllegalArgumentException("Поле 'name' пользователя не может быть пустым");
-//        }
         return userRepository.save(user);
     }
 
@@ -32,13 +29,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByName(name);
     }
 
-//    @Override
-//    public List<BoardGame> getBoardGamesByUserName(String userName) {
-//        User user = userRepository.findByName(userName);
-//        if (user != null) {
-//            return user.getBoardGames();
-//        } else {
-//            throw new IllegalArgumentException("Пользователь с именем " + userName + " не найден.");
-//        }
-//    }
+
 }

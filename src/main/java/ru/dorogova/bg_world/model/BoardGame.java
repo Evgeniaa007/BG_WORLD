@@ -21,13 +21,13 @@ public class BoardGame {
     /**
      * Название игры
      */
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     /**
      * Жанр игры
      */
-    @Column(name = "genre")
+    @Column(name = "genre", nullable = false)
     private String genre;
 
     /**
@@ -54,6 +54,10 @@ public class BoardGame {
     @JsonBackReference
     private User user;
 
+    /**
+     * Установка обратной связи в партией
+     * чтобы иметь возможность добавить партию к настольной игре
+     */
     public void addSession(Session session) {
         session.setBoardGame(this); // Установка обратной связи
         this.sessions.add(session);

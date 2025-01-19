@@ -23,17 +23,17 @@ public class Session {
     /**
      * Дата проведения партии
      */
-    @Column(name = "sessionDate")
-    private LocalDate sessionDate;
+    @Column(name = "sessionDate", nullable = false)
+    private String sessionDate;
     /**
      * Кол-во игроков. участвующих в партии
      */
-    @Column(name = "playersAmount")
+    @Column(name = "playersAmount", nullable = false)
     private int playersAmount;
     /**
      * Победитель
      */
-    @Column(name = "winner")
+    @Column(name = "winner", nullable = false)
     private String winner;
     /**
      * Впечатления (комментарии) к партии
@@ -41,21 +41,13 @@ public class Session {
     @Column(name = "impressions")
     private String impressions;
 
+    /**
+     * Связь, определябщая, что у одной настольной игры
+     * может быть несколько сессий
+     */
     @ManyToOne
     @JoinColumn(name = "boardGame_id")
     @JsonBackReference
     private BoardGame boardGame;
-
-
-    /**
-     * Владелец настольной игры
-     */
-    /*
-    @ManyToOne
-    @JoinColumn(name = "users_id", nullable = false)
-    private User user;
-
-*/
-
 
 }

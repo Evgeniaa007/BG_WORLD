@@ -12,8 +12,7 @@ public interface SessionService {
 
     List<Session> getAllSessions();
 
-   // List<Session> getSessionsByUserId(Long id);
-
+    List<Session> getBoardGameSessions(Long id);
 
     Optional<Session> getSessionById(Long id);
 

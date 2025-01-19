@@ -37,11 +37,10 @@ public class User {
             fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<BoardGame> boardGames;
-/*
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Session> sessions;
 
-*/
+    /**
+     * Устанавливает обратную связь с настольной игрой
+     */
     public void addBoardGame(BoardGame boardGame) {
         boardGame.setUser(this); // Установка обратной связи
         this.boardGames.add(boardGame);
