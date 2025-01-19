@@ -1,5 +1,7 @@
 package ru.dorogova.bg_world.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,7 +33,7 @@ public class BoardGame {
     /**
      * Дата появления игры в коллекции
      */
-    @Column(name = "added_to_collection (DD-MM-YYYY)")
+    @Column(name = "added_to_collection")
     private String gettingDate;
 
     /**
@@ -39,6 +41,7 @@ public class BoardGame {
      */
     @OneToMany(mappedBy = "boardGame", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
     private List<Session> sessions;
 
     /**
@@ -47,7 +50,8 @@ public class BoardGame {
     //@ManyToOne
     //@JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_name")
+    @JsonBackReference
     private User user;
 
     public void addSession(Session session) {

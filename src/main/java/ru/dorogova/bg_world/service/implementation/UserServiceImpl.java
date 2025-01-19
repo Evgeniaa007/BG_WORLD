@@ -2,6 +2,7 @@ package ru.dorogova.bg_world.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.repository.UserRepository;
 import ru.dorogova.bg_world.service.UserService;
@@ -30,4 +31,14 @@ public class UserServiceImpl implements UserService {
     public User findByName(String name) {
         return userRepository.findByName(name);
     }
+
+//    @Override
+//    public List<BoardGame> getBoardGamesByUserName(String userName) {
+//        User user = userRepository.findByName(userName);
+//        if (user != null) {
+//            return user.getBoardGames();
+//        } else {
+//            throw new IllegalArgumentException("Пользователь с именем " + userName + " не найден.");
+//        }
+//    }
 }

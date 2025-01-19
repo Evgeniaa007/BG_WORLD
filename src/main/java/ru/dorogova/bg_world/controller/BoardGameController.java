@@ -5,11 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dorogova.bg_world.model.BoardGame;
+import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.service.implementation.BoardGameServiceImpl;
 import ru.dorogova.bg_world.service.implementation.SessionServiceImpl;
 import ru.dorogova.bg_world.service.implementation.UserServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bg")
@@ -28,13 +30,21 @@ public class BoardGameController {
         this.userService = userService;
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<List<BoardGame>> getUserGames(@PathVariable String userName) {
-        return new ResponseEntity<>(bgService.getByUserName(userName), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<BoardGame>> getAllBoardGames(){
+        return new ResponseEntity<>(bgService.getAllBoardGames(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<BoardGame> addBoardGame(@RequestBody BoardGame boardGame) {
+    @GetMapping("/{userName}/collection")
+    public ResponseEntity<List<BoardGame>> getUserGames(@PathVariable String userName) {
+        List<BoardGame> boardGames = bgService.getBoardGamesByUserName(userName);
+        return new ResponseEntity<>(boardGames, HttpStatus.OK);
+    }
+
+    @PostMapping("/{userName}")
+    public ResponseEntity<BoardGame> addBoardGame(@RequestBody BoardGame boardGame,@PathVariable String userName) {
+        User user = userService.findByName(userName);
+        user.addBoardGame(boardGame);
         bgService.addBoardGame(boardGame);
         return new ResponseEntity<>(boardGame, HttpStatus.CREATED);
     }
@@ -46,8 +56,18 @@ public class BoardGameController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBoardGame(@PathVariable Long id) {
-        bgService.deleteBoardGame(id);
-        return ResponseEntity.ok().build();
+        Optional<BoardGame> optionalBoardGame = bgService.getBoardGameById(id);
+        if (optionalBoardGame.isPresent()) {
+            BoardGame boardGame = optionalBoardGame.get();
+            User user = boardGame.getUser();
+            if (user != null) {
+                user.getBoardGames().remove(boardGame);
+            }
+            bgService.deleteBoardGame(id);
+            return ResponseEntity.ok().build(); // Успех
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
 

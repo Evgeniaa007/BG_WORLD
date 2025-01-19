@@ -1,5 +1,6 @@
 package ru.dorogova.bg_world.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,7 +35,8 @@ public class User {
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<BoardGame> boardGames = new ArrayList<>();
+    @JsonManagedReference
+    private List<BoardGame> boardGames;
 /*
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Session> sessions;

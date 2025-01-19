@@ -3,6 +3,7 @@ package ru.dorogova.bg_world.service.implementation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.dorogova.bg_world.model.BoardGame;
+import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.repository.BoardGameRepository;
 import ru.dorogova.bg_world.service.BoardGameService;
 
@@ -16,6 +17,7 @@ public class BoardGameServiceImpl implements BoardGameService {
      * Интерфейс, позволяющий работать с данными
      */
     private final BoardGameRepository bgRepository;
+    private final UserServiceImpl userService;
 
 
     /**
@@ -35,9 +37,13 @@ public class BoardGameServiceImpl implements BoardGameService {
     }
 
     @Override
-    public List<BoardGame> getByUserName(String userName) {
-
-        return bgRepository.getByUserName(userName);
+    public List<BoardGame> getBoardGamesByUserName(String userName) {
+        User user = userService.findByName(userName);
+        if (user != null) {
+            return user.getBoardGames();
+        } else {
+            return List.of();
+        }
     }
 
     /**

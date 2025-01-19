@@ -1,5 +1,6 @@
 package ru.dorogova.bg_world.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public class Session {
     /**
      * Дата проведения партии
      */
-    @Column(name = "sessionDate (DD-MM-YYYY)")
+    @Column(name = "sessionDate")
     private LocalDate sessionDate;
     /**
      * Кол-во игроков. участвующих в партии
@@ -42,6 +43,7 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "boardGame_id")
+    @JsonBackReference
     private BoardGame boardGame;
 
 
