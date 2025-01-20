@@ -17,7 +17,6 @@
     <li th:each="gameSession : ${recentSessions}">
         <span th:text="${gameSession.boardGame.title}"></span>
         <span th:text="${gameSession.sessionDate}"></span> -
-        <span th:text="${gameSession.sessionDate}"></span> -
         <span th:text="${gameSession.playersAmount}"></span> -
         <span th:text="${gameSession.winner}"></span> -
         <span th:text="${gameSession.impressions}"></span> -

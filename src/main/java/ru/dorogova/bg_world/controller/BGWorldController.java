@@ -65,7 +65,6 @@ public class BGWorldController {
      */
     @GetMapping("/user/{userName}")
     public String userCollection(@PathVariable String userName, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByName(userName);
         model.addAttribute("user", user);
         model.addAttribute("newBoardGame", new BoardGame());
@@ -81,9 +80,11 @@ public class BGWorldController {
     @PostMapping("/user/{userName}/addGame")
     public String addBoardGame(@PathVariable String userName, @ModelAttribute BoardGame boardGame) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByName(userName);
-        user.addBoardGame(boardGame);
-        boardGameService.addBoardGame(boardGame);
+        User user = userService.findByName(authentication.getName());
+        if(user.getName().equals(userName)){
+            user.addBoardGame(boardGame);
+            boardGameService.addBoardGame(boardGame);
+        }
         return "redirect:/user/" + userName;
     }
 
@@ -92,11 +93,12 @@ public class BGWorldController {
      */
     @GetMapping("deleteGame/{gameId}")
     public String deleteBoardGame(@PathVariable("gameId") Long gameId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<BoardGame> optionalBoardGame = boardGameService.getBoardGameById(gameId);
         if (optionalBoardGame.isPresent()) {
             BoardGame boardGame = optionalBoardGame.get();
             User user = boardGame.getUser();
-            if (user != null) {
+            if (user != null && user.getName().equals(authentication.getName())) {
                 user.getBoardGames().remove(boardGame);
             }
         }
@@ -111,9 +113,18 @@ public class BGWorldController {
      */
     @GetMapping("/editGame/{gameId}")
     public String editBoardGamePage(@PathVariable Long gameId, Model model) {
-        Optional<BoardGame> boardGame = boardGameService.getBoardGameById(gameId);
-        boardGame.ifPresent(game -> model.addAttribute("boardGame", game));
-        return "edit-game";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<BoardGame> optionalBoardGame = boardGameService.getBoardGameById(gameId);
+        //boardGame.ifPresent(game -> model.addAttribute("boardGame", game));
+        if(optionalBoardGame.isPresent()){
+            BoardGame boardGame = optionalBoardGame.get();
+            User user = boardGame.getUser();
+            if (user != null && user.getName().equals(authentication.getName())) {
+                model.addAttribute("boardGame", boardGame);
+                return "edit-game";
+            }
+        }
+        return "redirect:/main";
     }
 
     @PostMapping("/editGame")
@@ -140,11 +151,15 @@ public class BGWorldController {
      */
     @PostMapping("/game/{gameId}/addSession")
     public String addGameSession(@PathVariable Long gameId, @ModelAttribute Session session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<BoardGame> boardGame = boardGameService.getBoardGameById(gameId);
         if (boardGame.isPresent()) {
             BoardGame game = boardGame.get();
-            session.setBoardGame(game); // Установить связь между партией и игрой
-            sessionService.addSession(session); // Сохранить партию
+            User user = game.getUser();
+            if(user.getName().equals(authentication.getName())){
+                session.setBoardGame(game); // Установить связь между партией и игрой
+                sessionService.addSession(session); // Сохранить партию
+            }
         }
         return "redirect:/game/" + gameId +"/sessions";
     }
@@ -154,12 +169,16 @@ public class BGWorldController {
      */
     @GetMapping("/deleteSession/{sessionId}")
     public String deleteGameSession(@PathVariable Long sessionId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Session>optionalSession = sessionService.getSessionById(sessionId);
         if(optionalSession.isPresent()){
             Session session = optionalSession.get();
             BoardGame boardGame = session.getBoardGame();
             if(boardGame != null){
-                boardGame.getSessions().remove(session);
+                User user = boardGame.getUser();
+                if(user.getName().equals(authentication.getName())) {
+                    boardGame.getSessions().remove(session);
+                }
             }
             sessionService.deleteSession(sessionId);
         }
@@ -173,9 +192,21 @@ public class BGWorldController {
      */
     @GetMapping("/editSession/{sessionId}")
     public String editSessionPage(@PathVariable Long sessionId, Model model) {
-        Optional<Session> session = sessionService.getSessionById(sessionId);
-        session.ifPresent(s -> model.addAttribute("gameSession", s));
-        return "edit-session";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Session> optionalSession = sessionService.getSessionById(sessionId);
+        if(optionalSession.isPresent()){
+            Session session = optionalSession.get();
+            BoardGame boardGame = session.getBoardGame();
+            User user = boardGame.getUser();
+            if(user.getName().equals(authentication.getName())) {
+                model.addAttribute("gameSession", session);
+                return "edit-session";
+            }
+
+        }
+        return "redirect:/main";
+        //session.ifPresent(s -> model.addAttribute("gameSession", s));
+
     }
 
     @PostMapping("/editSession")
