@@ -1,4 +1,4 @@
-package ru.dorogova.bg_world.controller;
+/*package ru.dorogova.bg_world.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,3 +74,4 @@ public class SessionController {
     }
 
 }
+*/

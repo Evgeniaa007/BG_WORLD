@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head>
+    <title>Главная</title>
+</head>
+<body>
+<!-- Home Page -->
+<h1>Добавить нового пользователя</h1>
+<form action="/addUser" method="post">
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username" name="name" required>
+    <label for="password">Пароль:</label>
+    <input type="text" id="password" name="password" required>
+    <button type="submit">Добавить</button>
+</form>
+<a href="/main">Перейти на основную страницу</a>
+</body>
+</html>

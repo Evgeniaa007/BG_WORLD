@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head>
+    <title>Редактирование игры</title>
+</head>
+<body>
+<h1>Редактировать игру</h1>
+<form th:action="@{/editGame}" th:object="${boardGame}" method="post">
+    <label>ID</label>
+    <input readonly type="number" th:field="*{id}" placeholder="ID" >
+    <br/>
+    <label for="title">Название:</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Название">
+    <label for="genre">Жанр:</label>
+    <input type="text" th:field="*{genre}" id="genre" placeholder="Жанр">
+    <label for="gettingDate">Дата приобретения:</label>
+    <input type="text" th:field="*{gettingDate}" id="gettingDate" placeholder="Дата приобретения">
+    <br/>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>
+

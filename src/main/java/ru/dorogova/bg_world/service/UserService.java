@@ -12,5 +12,4 @@ public interface UserService {
 
     User findByName(String name);
 
-    //List<BoardGame> getBoardGamesByUserName(String name);
 }

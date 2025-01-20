@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head>
+    <title>Коллекция пользователя</title>
+</head>
+<body>
+<h1 th:text="${user.name} + ' Коллекция'"></h1>
+<h2>Настольные игры</h2>
+<ul>
+    <li th:each="game : ${user.boardGames}">
+        <span th:text="${game.title}"></span> -
+        <span th:text="${game.genre}"></span> -
+        <span th:text="${game.gettingDate}"></span> -
+        <a th:href="@{/editGame/{gameId}(gameId=${game.id})}">Редактировать</a>
+        <a th:href="@{/deleteGame/{gameId}(gameId=${game.id})}">Удалить</a>
+        <a th:href="@{/game/{id}/sessions(id=${game.id})}">Посмотреть партии</a>
+    </li>
+</ul>
+<h2>Добавить игру</h2>
+<form th:action="@{/user/{name}/addGame(name=${user.name})}" method="post">
+    <label for="title">Название:</label>
+    <input type="text" id="title" name="title" required>
+    <label for="genre">Жанр:</label>
+    <input type="text" id="genre" name="genre" required>
+    <label for="gettingDate">Дата приобретения:</label>
+    <input type="text" id="gettingDate" name="gettingDate" required>
+    <button type="submit">Добавить</button>
+</form>
+</body>
+</html>

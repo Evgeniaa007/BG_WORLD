@@ -14,11 +14,11 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /**
-     * Название настольной игры
-     */
-    @Column(name = "BoardGameName")
-    private String bgName;
+//    /**
+//     * Название настольной игры
+//     */
+//    @Column(name = "BoardGameName")
+//    private String bgName;
 
     /**
      * Дата проведения партии
@@ -49,5 +49,9 @@ public class Session {
     @JoinColumn(name = "boardGame_id")
     @JsonBackReference
     private BoardGame boardGame;
+
+    public String getBgName() {
+        return boardGame != null ? boardGame.getTitle() : "";
+    }
 
 }

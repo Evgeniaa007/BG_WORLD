@@ -16,7 +16,7 @@ public interface SessionService {
 
     Optional<Session> getSessionById(Long id);
 
-    Session editSession (Long id, Session session);
+    Session editSession (/*Long id, */Session session);
 
     void deleteSession (Long id);
 

@@ -1,4 +1,4 @@
-package ru.dorogova.bg_world.controller;
+/*package ru.dorogova.bg_world.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,11 +37,7 @@ public class UserController {
         return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{name}/collection")
-//    public ResponseEntity<BoardGame> getUserGames(@PathVariable String name){
-//        return new ResponseEntity<>(userService.getBoardGamesByUserName(name), HttpStatus.OK);
-//    }
-}
+}*/
 
 
 

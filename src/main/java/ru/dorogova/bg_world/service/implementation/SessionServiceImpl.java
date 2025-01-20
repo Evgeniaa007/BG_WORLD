@@ -57,24 +57,27 @@ public class SessionServiceImpl implements SessionService {
 
     /**
      * Изменение данных партии
-     * @param id партии
      * @param session новые данные для внесения изменений
      * @return обновленная партия
      */
     @Override
-    public Session editSession(Long id, Session session) {
-        Optional<Session> optionalSession = sessionRepository.findById(id);
+    public Session editSession(/*Long id, */Session session) {
+        Optional<Session> optionalSession = sessionRepository.findById(session.getId());
         if(optionalSession.isPresent()){
             Session s = optionalSession.get();
-            s.setBgName(session.getBgName());
+            //s.setBgName(session.getBgName());
             s.setSessionDate(session.getSessionDate());
             s.setPlayersAmount(session.getPlayersAmount());
             s.setWinner(session.getWinner());
             s.setImpressions(session.getImpressions());
+            if (session.getBoardGame() != null) {
+                s.setBoardGame(session.getBoardGame());
+            }
             return sessionRepository.save(s);
+
         }
         else {
-            throw new IllegalArgumentException("Запрашиваемая сессия не существует.");
+            throw new RuntimeException();
         }
     }
 

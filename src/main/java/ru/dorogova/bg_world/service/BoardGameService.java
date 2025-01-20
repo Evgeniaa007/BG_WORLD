@@ -15,7 +15,7 @@ public interface BoardGameService {
 
     Optional<BoardGame> getBoardGameById(Long id);
 
-    BoardGame editBoardGame (Long id, BoardGame bg);
+    BoardGame editBoardGame (/*Long id, */BoardGame bg);
 
     void deleteBoardGame (Long id);
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head>
+    <title>Редактирование партии</title>
+</head>
+<body>
+<h1>Редактировать партию</h1>
+<form th:action="@{/editSession}" th:object="${gameSession}" method="post">
+    <label>ID</label>
+    <input readonly type="number" th:field="*{id}" placeholder="ID" >
+    <label>ID Настольной игры</label>
+    <input readonly type="number" th:field="*{boardGame.id}" placeholder="ID Настольной игры" >
+    <label>Название настольной игры</label>
+    <input readonly type="text" th:field="*{boardGame.title}" placeholder="Название настольной игры" >
+<!--    <input readonly type="text" th:field="*{bgName}" placeholder="Название нестольной игры">-->
+    <br/>
+    <label for="sessionDate">Дата партии:</label>
+    <input type="text" th:field="*{sessionDate}" id="sessionDate" placeholder="Дата партии">
+    <label for="playersAmount">Количество игроков:</label>
+    <input type="text" th:field="*{playersAmount}" id="playersAmount" placeholder="Количество игроков">
+    <label for="winner">Победитель:</label>
+    <input type="text" th:field="*{winner}" id="winner" placeholder="Победитель">
+    <label for="impressions">Впечатления:</label>
+    <input type="text" th:field="*{impressions}" id="impressions" placeholder="Впечатления">
+    <br/>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

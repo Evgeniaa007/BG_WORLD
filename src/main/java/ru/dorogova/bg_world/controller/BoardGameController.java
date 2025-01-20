@@ -1,4 +1,4 @@
-package ru.dorogova.bg_world.controller;
+/*package ru.dorogova.bg_world.controller;
 
 
 import org.springframework.http.HttpStatus;
@@ -70,4 +70,4 @@ public class BoardGameController {
         }
     }
 }
-
+*/

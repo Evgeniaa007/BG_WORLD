@@ -61,22 +61,21 @@ public class BoardGameServiceImpl implements BoardGameService {
 
     /**
      * Метод внесения изменений в запись о настольной игре
-     * @param id по которому мы ищем игру для внесения изменений
      * @param bg данные для внесения изменений
      * @return настольная игра с обновленной информацией
      */
     @Override
-    public BoardGame editBoardGame(Long id, BoardGame bg) {
-        Optional<BoardGame> optionalBG = bgRepository.findById(id);
+    public BoardGame editBoardGame(/*Long id,*/ BoardGame bg) {
+        Optional<BoardGame> optionalBG = bgRepository.findById(bg.getId());
         if(optionalBG.isPresent()){
             BoardGame boardGame = optionalBG.get();
             boardGame.setTitle(bg.getTitle());
-            boardGame.setGettingDate(bg.getGettingDate());
             boardGame.setGenre(bg.getGenre());
+            boardGame.setGettingDate(bg.getGettingDate());
             return bgRepository.save(boardGame);
         }
         else {
-            throw new IllegalArgumentException("Запрашиваемая настольная игра не занесена в каталог");
+            throw new RuntimeException();
         }
     }
 
