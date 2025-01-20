@@ -1,6 +1,8 @@
 package ru.dorogova.bg_world.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,31 +21,31 @@ import java.util.Optional;
  */
 @Controller
 @AllArgsConstructor
-public class AppController {
+public class BGWorldController {
 
     private final UserServiceImpl userService;
     private final BoardGameServiceImpl boardGameService;
     private final SessionServiceImpl sessionService;
 
-    /**
-     * начальная страница
-     */
-    @GetMapping("/")
-    public String homePage(Model model) {
-        model.addAttribute("newUser", new User());
-        return "home";
-    }
+//    /**
+//     * начальная страница
+//     */
+//    @GetMapping("/")
+//    public String homePage(Model model) {
+//        model.addAttribute("newUser", new User());
+//        return "home";
+//    }
 
-    /**
-     * Добавление пользователя
-     * @param user новый пользователь
-     * @return страница main
-     */
-    @PostMapping("/addUser")
-    public String addUser(@ModelAttribute User user) {
-        userService.addUser(user);
-        return "redirect:/main";
-    }
+//    /**
+//     * Добавление пользователя
+//     * @param user новый пользователь
+//     * @return страница main
+//     */
+//    @PostMapping("/addUser")
+//    public String addUser(@ModelAttribute User user) {
+//        userService.addUser(user);
+//        return "redirect:/main";
+//    }
 
     /**
      * страница, на которой отображается список пользователей
@@ -63,6 +65,7 @@ public class AppController {
      */
     @GetMapping("/user/{userName}")
     public String userCollection(@PathVariable String userName, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByName(userName);
         model.addAttribute("user", user);
         model.addAttribute("newBoardGame", new BoardGame());
@@ -77,6 +80,7 @@ public class AppController {
      */
     @PostMapping("/user/{userName}/addGame")
     public String addBoardGame(@PathVariable String userName, @ModelAttribute BoardGame boardGame) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByName(userName);
         user.addBoardGame(boardGame);
         boardGameService.addBoardGame(boardGame);
