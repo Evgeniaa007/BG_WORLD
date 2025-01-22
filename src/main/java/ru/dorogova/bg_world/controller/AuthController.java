@@ -19,7 +19,8 @@ public class AuthController {
     private final UserServiceImpl userService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(PasswordEncoder passwordEncoder, UserServiceImpl userService) {
+    public AuthController(PasswordEncoder passwordEncoder,
+                          UserServiceImpl userService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }

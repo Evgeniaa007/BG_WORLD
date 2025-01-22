@@ -4,16 +4,42 @@
 <head>
     <title>Вход</title>
 </head>
-<body>
-<h1>Вход</h1>
-<form th:action="@{/login}" method="post">
+<body style="font-family: Arial, sans-serif; background-color: #e8f5e9; color: #1b5e20;">
+<h1 style="text-align: center; color: #2e7d32;">Вход</h1>
+<form th:action="@{/login}" method="post"
+      style="margin: 0 auto; width: 50%; padding: 20px; background-color: #c8e6c9; border-radius: 10px;">
     <label for="username">Имя пользователя:</label>
-    <input type="text" id="username" name="username" required>
+    <input type="text" id="username" name="username" required
+           style="width: 100%; margin-bottom: 10px;">
     <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Войти</button>
-
-    <a th:href="@{/register}"> Register/SignUp Here</a>
+    <input type="password" id="password" name="password" required
+           style="width: 100%; margin-bottom: 10px;">
+    <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+        Войти
+    </button>
+    <p style="text-align: center; margin-top: 10px;">
+        <a th:href="@{/register}" style="color: #1e88e5; text-decoration: none;">Зарегистрироваться</a>
+    </p>
 </form>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <title>Вход</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Вход</h1>-->
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <label for="username">Имя пользователя:</label>-->
+<!--    <input type="text" id="username" name="username" required>-->
+<!--    <label for="password">Пароль:</label>-->
+<!--    <input type="password" id="password" name="password" required>-->
+<!--    <button type="submit">Войти</button>-->
+
+<!--    <a th:href="@{/register}"> Register/SignUp Here</a>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

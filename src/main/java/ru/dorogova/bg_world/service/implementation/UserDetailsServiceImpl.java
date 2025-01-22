@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     user.getPassword(),
                     authorities);
         } else {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Username or password are incorrect.");
         }
     }
 

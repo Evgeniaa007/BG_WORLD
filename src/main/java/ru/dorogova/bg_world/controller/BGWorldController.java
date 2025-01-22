@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.Session;
 import ru.dorogova.bg_world.model.User;
-import ru.dorogova.bg_world.service.implementation.BoardGameServiceImpl;
-import ru.dorogova.bg_world.service.implementation.SessionServiceImpl;
-import ru.dorogova.bg_world.service.implementation.UserServiceImpl;
-
+import ru.dorogova.bg_world.service.BoardGameService;
+import ru.dorogova.bg_world.service.SessionService;
+import ru.dorogova.bg_world.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,29 +22,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BGWorldController {
 
-    private final UserServiceImpl userService;
-    private final BoardGameServiceImpl boardGameService;
-    private final SessionServiceImpl sessionService;
-
-//    /**
-//     * начальная страница
-//     */
-//    @GetMapping("/")
-//    public String homePage(Model model) {
-//        model.addAttribute("newUser", new User());
-//        return "home";
-//    }
-
-//    /**
-//     * Добавление пользователя
-//     * @param user новый пользователь
-//     * @return страница main
-//     */
-//    @PostMapping("/addUser")
-//    public String addUser(@ModelAttribute User user) {
-//        userService.addUser(user);
-//        return "redirect:/main";
-//    }
+    private final UserService userService;
+    private final BoardGameService boardGameService;
+    private final SessionService sessionService;
 
     /**
      * страница, на которой отображается список пользователей
@@ -54,7 +33,7 @@ public class BGWorldController {
     @GetMapping("/main")
     public String mainPage(Model model) {
         List<User> users = userService.getAllUsers();
-        List<Session> recentSessions = sessionService.getAllSessions(); // Можно добавить сортировку по дате
+        List<Session> recentSessions = sessionService.getAllSessions();
         model.addAttribute("users", users);
         model.addAttribute("recentSessions", recentSessions);
         return "main";
@@ -216,3 +195,25 @@ public class BGWorldController {
     }
 
 }
+
+
+//    /**
+//     * начальная страница
+//     */
+//    @GetMapping("/")
+//    public String homePage(Model model) {
+//        model.addAttribute("newUser", new User());
+//        return "home";
+//    }
+
+//    /**
+//     * Добавление пользователя
+//     * @param user новый пользователь
+//     * @return страница main
+//     */
+//    @PostMapping("/addUser")
+//    public String addUser(@ModelAttribute User user) {
+//        userService.addUser(user);
+//        return "redirect:/main";
+//    }
+

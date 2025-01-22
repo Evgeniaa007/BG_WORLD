@@ -4,31 +4,68 @@
 <head>
     <title>Партии игры</title>
 </head>
-<body>
-<h1 th:text="'Партии для ' + ${boardGame.title}"></h1>
-<ul>
-    <li th:each="gameSession : ${boardGame.sessions}">
+<body style="font-family: Arial, sans-serif; background-color: #e8f5e9; color: #1b5e20;">
+<h1 th:text="'Партии для ' + ${boardGame.title}" style="text-align: center; color: #2e7d32;"></h1>
+<ul style="list-style-type: none; padding: 0; margin: 0;">
+    <li th:each="gameSession : ${boardGame.sessions}"
+        style="padding: 10px; margin: 5px; background-color: #c8e6c9; border-radius: 5px;">
         <span th:text="${gameSession.sessionDate}"></span> -
-        <span th:text="${gameSession.playersAmount}"></span> -
-        <span th:text="${gameSession.winner}"></span> -
+        <span th:text="${gameSession.playersAmount}"></span> игроков -
+        <span th:text="${gameSession.winner}"></span> победитель -
         <span th:text="${gameSession.impressions}"></span> -
-        <a th:href="@{/editSession/{id}(id=${gameSession.id})}">Редактировать</a>
-        <a th:href="@{/deleteSession/{sessionId}(sessionId=${gameSession.id})}">Удалить</a>
+        <a th:href="@{/editSession/{id}(id=${gameSession.id})}" style="color: #1b5e20; text-decoration: none;">Редактировать</a> |
+        <a th:href="@{/deleteSession/{sessionId}(sessionId=${gameSession.id})}" style="color: #d32f2f; text-decoration: none;">Удалить</a>
     </li>
 </ul>
-<h2>Добавить новую партию</h2>
-<form th:action="@{/game/{id}/addSession(id=${boardGame.id})}" method="post">
-<!--    <label for="bgName">Название нестольной игры:</label>-->
-<!--    <input type="text" id="bgName" name="bgName">-->
+<h2 style="text-align: center; color: #2e7d32;">Добавить новую партию</h2>
+<form th:action="@{/game/{id}/addSession(id=${boardGame.id})}" method="post"
+      style="margin: 0 auto; width: 50%; padding: 20px; background-color: #c8e6c9; border-radius: 10px;">
     <label for="sessionDate">Дата партии:</label>
-    <input type="text" id="sessionDate" name="sessionDate" required>
+    <input type="text" id="sessionDate" name="sessionDate" required style="width: 100%; margin-bottom: 10px;">
     <label for="playersAmount">Количество игроков:</label>
-    <input type="text" id="playersAmount" name="playersAmount" required>
+    <input type="text" id="playersAmount" name="playersAmount" required style="width: 100%; margin-bottom: 10px;">
     <label for="winner">Победитель:</label>
-    <input type="text" id="winner" name="winner" required>
+    <input type="text" id="winner" name="winner" required style="width: 100%; margin-bottom: 10px;">
     <label for="impressions">Впечатления:</label>
-    <input type="text" id="impressions" name="impressions" required>
-    <button type="submit">Добавить</button>
+    <input type="text" id="impressions" name="impressions" required style="width: 100%; margin-bottom: 10px;">
+    <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+        Добавить
+    </button>
 </form>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <title>Партии игры</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1 th:text="'Партии для ' + ${boardGame.title}"></h1>-->
+<!--<ul>-->
+<!--    <li th:each="gameSession : ${boardGame.sessions}">-->
+<!--        <span th:text="${gameSession.sessionDate}"></span> - -->
+<!--        <span th:text="${gameSession.playersAmount}"></span> - -->
+<!--        <span th:text="${gameSession.winner}"></span> - -->
+<!--        <span th:text="${gameSession.impressions}"></span> - -->
+<!--        <a th:href="@{/editSession/{id}(id=${gameSession.id})}">Редактировать</a>-->
+<!--        <a th:href="@{/deleteSession/{sessionId}(sessionId=${gameSession.id})}">Удалить</a>-->
+<!--    </li>-->
+<!--</ul>-->
+<!--<h2>Добавить новую партию</h2>-->
+<!--<form th:action="@{/game/{id}/addSession(id=${boardGame.id})}" method="post">-->
+<!--&lt;!&ndash;    <label for="bgName">Название нестольной игры:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" id="bgName" name="bgName">&ndash;&gt;-->
+<!--    <label for="sessionDate">Дата партии:</label>-->
+<!--    <input type="text" id="sessionDate" name="sessionDate" required>-->
+<!--    <label for="playersAmount">Количество игроков:</label>-->
+<!--    <input type="text" id="playersAmount" name="playersAmount" required>-->
+<!--    <label for="winner">Победитель:</label>-->
+<!--    <input type="text" id="winner" name="winner" required>-->
+<!--    <label for="impressions">Впечатления:</label>-->
+<!--    <input type="text" id="impressions" name="impressions" required>-->
+<!--    <button type="submit">Добавить</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

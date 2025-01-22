@@ -2,26 +2,56 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <head>
-    <title>Основная страница</title>
+    <title>Мир Настольных Игр</title>
 </head>
-<body>
-<h1>Список пользователей</h1>
-<ul>
-    <li th:each="user : ${users}">
-        <a th:href="@{/user/{name}(name=${user.name})}" th:text="${user.name}"></a>
+<body style="font-family: Arial, sans-serif; background-color: #e8f5e9; color: #1b5e20;">
+<h1 style="text-align: center; color: #2e7d32;">Список пользователей</h1>
+<ul style="list-style-type: none; padding: 0; margin: 0;">
+    <li th:each="user : ${users}"
+        style="padding: 10px; margin: 5px; background-color: #c8e6c9; border-radius: 5px;">
+        <a th:href="@{/user/{name}(name=${user.name})}" th:text="${user.name}"
+           style="color: #1b5e20; text-decoration: none;"></a>
     </li>
 </ul>
 
-<h2>Последние партии</h2>
-<ul>
-    <li th:each="gameSession : ${recentSessions}">
-        <span th:text="${gameSession.boardGame.title}"></span>
-        <span th:text="${gameSession.sessionDate}"></span> -
-        <span th:text="${gameSession.playersAmount}"></span> -
-        <span th:text="${gameSession.winner}"></span> -
-        <span th:text="${gameSession.impressions}"></span> -
+<h2 style="text-align: center; color: #2e7d32;">Последние партии</h2>
+<ul style="list-style-type: none; padding: 0; margin: 0;">
+    <li th:each="gameSession : ${recentSessions}"
+        style="padding: 10px; margin: 5px; background-color: #c8e6c9; border-radius: 5px;">
+        <span th:text="${gameSession.boardGame.title}"></span> —
+        <span th:text="${gameSession.sessionDate}"></span> —
+        <span th:text="${gameSession.playersAmount}"></span> игроков —
+        <span th:text="${gameSession.winner}"></span> победитель —
+        <span th:text="${gameSession.impressions}"></span>
     </li>
 </ul>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <title>Мир Настольных Игр</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Список пользователей</h1>-->
+<!--<ul>-->
+<!--    <li th:each="user : ${users}">-->
+<!--        <a th:href="@{/user/{name}(name=${user.name})}" th:text="${user.name}"></a>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!--<h2>Последние партии</h2>-->
+<!--<ul>-->
+<!--    <li th:each="gameSession : ${recentSessions}">-->
+<!--        <span th:text="${gameSession.boardGame.title}"></span>-->
+<!--        <span th:text="${gameSession.sessionDate}"></span> - -->
+<!--        <span th:text="${gameSession.playersAmount}"></span> - -->
+<!--        <span th:text="${gameSession.winner}"></span> - -->
+<!--        <span th:text="${gameSession.impressions}"></span> - -->
+<!--    </li>-->
+<!--</ul>-->
+<!--</body>-->
+<!--</html>-->
 

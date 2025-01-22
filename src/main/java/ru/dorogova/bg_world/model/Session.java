@@ -3,6 +3,7 @@ package ru.dorogova.bg_world.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -14,11 +15,6 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    /**
-//     * Название настольной игры
-//     */
-//    @Column(name = "BoardGameName")
-//    private String bgName;
 
     /**
      * Дата проведения партии

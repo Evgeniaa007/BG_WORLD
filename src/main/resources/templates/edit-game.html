@@ -4,21 +4,50 @@
 <head>
     <title>Редактирование игры</title>
 </head>
-<body>
-<h1>Редактировать игру</h1>
-<form th:action="@{/editGame}" th:object="${boardGame}" method="post">
-    <label>ID</label>
-    <input readonly type="number" th:field="*{id}" placeholder="ID" >
-    <br/>
+<body style="font-family: Arial, sans-serif; background-color: #e8f5e9; color: #1b5e20;">
+<h1 style="text-align: center; color: #2e7d32;">Редактировать игру</h1>
+<form th:action="@{/editGame}" th:object="${boardGame}" method="post"
+      style="margin: 0 auto; width: 50%; padding: 20px; background-color: #c8e6c9; border-radius: 10px;">
+    <label>ID:</label>
+    <input readonly type="number" th:field="*{id}" placeholder="ID"
+           style="width: 100%; margin-bottom: 10px;">
     <label for="title">Название:</label>
-    <input type="text" th:field="*{title}" id="title" placeholder="Название">
+    <input type="text" th:field="*{title}" id="title" placeholder="Название"
+           style="width: 100%; margin-bottom: 10px;">
     <label for="genre">Жанр:</label>
-    <input type="text" th:field="*{genre}" id="genre" placeholder="Жанр">
+    <input type="text" th:field="*{genre}" id="genre" placeholder="Жанр"
+           style="width: 100%; margin-bottom: 10px;">
     <label for="gettingDate">Дата приобретения:</label>
-    <input type="text" th:field="*{gettingDate}" id="gettingDate" placeholder="Дата приобретения">
-    <br/>
-    <button type="submit">Сохранить</button>
+    <input type="text" th:field="*{gettingDate}" id="gettingDate" placeholder="Дата приобретения"
+           style="width: 100%; margin-bottom: 10px;">
+    <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+        Сохранить
+    </button>
 </form>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <title>Редактирование игры</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Редактировать игру</h1>-->
+<!--<form th:action="@{/editGame}" th:object="${boardGame}" method="post">-->
+<!--    <label>ID</label>-->
+<!--    <input readonly type="number" th:field="*{id}" placeholder="ID" >-->
+<!--    <br/>-->
+<!--    <label for="title">Название:</label>-->
+<!--    <input type="text" th:field="*{title}" id="title" placeholder="Название">-->
+<!--    <label for="genre">Жанр:</label>-->
+<!--    <input type="text" th:field="*{genre}" id="genre" placeholder="Жанр">-->
+<!--    <label for="gettingDate">Дата приобретения:</label>-->
+<!--    <input type="text" th:field="*{gettingDate}" id="gettingDate" placeholder="Дата приобретения">-->
+<!--    <br/>-->
+<!--    <button type="submit">Сохранить</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
 

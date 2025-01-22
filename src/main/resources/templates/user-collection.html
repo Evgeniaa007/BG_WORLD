@@ -4,28 +4,64 @@
 <head>
     <title>Коллекция пользователя</title>
 </head>
-<body>
-<h1 th:text="${user.name} + ' Коллекция'"></h1>
-<h2>Настольные игры</h2>
-<ul>
-    <li th:each="game : ${user.boardGames}">
+<body style="font-family: Arial, sans-serif; background-color: #e8f5e9; color: #1b5e20;">
+<h1 th:text="${user.name} + ' Коллекция'" style="text-align: center; color: #2e7d32;"></h1>
+<h2 style="text-align: center; color: #2e7d32;">Настольные игры</h2>
+<ul style="list-style-type: none; padding: 0; margin: 0;">
+    <li th:each="game : ${user.boardGames}"
+        style="padding: 10px; margin: 5px; background-color: #c8e6c9; border-radius: 5px;">
         <span th:text="${game.title}"></span> -
         <span th:text="${game.genre}"></span> -
         <span th:text="${game.gettingDate}"></span> -
-        <a th:href="@{/editGame/{gameId}(gameId=${game.id})}">Редактировать</a>
-        <a th:href="@{/deleteGame/{gameId}(gameId=${game.id})}">Удалить</a>
-        <a th:href="@{/game/{id}/sessions(id=${game.id})}">Посмотреть партии</a>
+        <a th:href="@{/editGame/{gameId}(gameId=${game.id})}" style="color: #1b5e20; text-decoration: none;">Редактировать</a> |
+        <a th:href="@{/deleteGame/{gameId}(gameId=${game.id})}" style="color: #d32f2f; text-decoration: none;">Удалить</a> |
+        <a th:href="@{/game/{id}/sessions(id=${game.id})}" style="color: #1e88e5; text-decoration: none;">Посмотреть партии</a>
     </li>
 </ul>
-<h2>Добавить игру</h2>
-<form th:action="@{/user/{name}/addGame(name=${user.name})}" method="post">
+<h2 style="text-align: center; color: #2e7d32;">Добавить игру</h2>
+<form th:action="@{/user/{name}/addGame(name=${user.name})}" method="post"
+      style="margin: 0 auto; width: 50%; padding: 20px; background-color: #c8e6c9; border-radius: 10px;">
     <label for="title">Название:</label>
-    <input type="text" id="title" name="title" required>
+    <input type="text" id="title" name="title" required style="width: 100%; margin-bottom: 10px;">
     <label for="genre">Жанр:</label>
-    <input type="text" id="genre" name="genre" required>
+    <input type="text" id="genre" name="genre" required style="width: 100%; margin-bottom: 10px;">
     <label for="gettingDate">Дата приобретения:</label>
-    <input type="text" id="gettingDate" name="gettingDate" required>
-    <button type="submit">Добавить</button>
+    <input type="text" id="gettingDate" name="gettingDate" required style="width: 100%; margin-bottom: 10px;">
+    <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+        Добавить
+    </button>
 </form>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta charset="UTF-8">-->
+<!--<head>-->
+<!--    <title>Коллекция пользователя</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1 th:text="${user.name} + ' Коллекция'"></h1>-->
+<!--<h2>Настольные игры</h2>-->
+<!--<ul>-->
+<!--    <li th:each="game : ${user.boardGames}">-->
+<!--        <span th:text="${game.title}"></span> - -->
+<!--        <span th:text="${game.genre}"></span> - -->
+<!--        <span th:text="${game.gettingDate}"></span> - -->
+<!--        <a th:href="@{/editGame/{gameId}(gameId=${game.id})}">Редактировать</a>-->
+<!--        <a th:href="@{/deleteGame/{gameId}(gameId=${game.id})}">Удалить</a>-->
+<!--        <a th:href="@{/game/{id}/sessions(id=${game.id})}">Посмотреть партии</a>-->
+<!--    </li>-->
+<!--</ul>-->
+<!--<h2>Добавить игру</h2>-->
+<!--<form th:action="@{/user/{name}/addGame(name=${user.name})}" method="post">-->
+<!--    <label for="title">Название:</label>-->
+<!--    <input type="text" id="title" name="title" required>-->
+<!--    <label for="genre">Жанр:</label>-->
+<!--    <input type="text" id="genre" name="genre" required>-->
+<!--    <label for="gettingDate">Дата приобретения:</label>-->
+<!--    <input type="text" id="gettingDate" name="gettingDate" required>-->
+<!--    <button type="submit">Добавить</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

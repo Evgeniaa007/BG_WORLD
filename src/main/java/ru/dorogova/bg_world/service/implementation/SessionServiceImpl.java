@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.Session;
-import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.repository.SessionRepository;
 import ru.dorogova.bg_world.service.SessionService;
 

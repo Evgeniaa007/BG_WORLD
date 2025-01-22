@@ -3,6 +3,7 @@ package ru.dorogova.bg_world.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 import lombok.Data;
 
 import java.util.List;
@@ -49,7 +50,8 @@ public class BoardGame {
      */
     //@ManyToOne
     //@JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE,
+            CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     @JsonBackReference
     private User user;
