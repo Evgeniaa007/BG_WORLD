@@ -2,6 +2,7 @@ package ru.dorogova.bg_world.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.dorogova.bg_world.aspects.TrackActionsWithBoardGames;
 import ru.dorogova.bg_world.model.BoardGame;
 import ru.dorogova.bg_world.model.User;
 import ru.dorogova.bg_world.repository.BoardGameRepository;
@@ -23,6 +24,7 @@ public class BoardGameServiceImpl implements BoardGameService {
     /**
      * Добавление новой настольной игры в коллекцию
      */
+    @TrackActionsWithBoardGames
     @Override
     public BoardGame addBoardGame(BoardGame boardGame) {
         return bgRepository.save(boardGame);
@@ -64,6 +66,7 @@ public class BoardGameServiceImpl implements BoardGameService {
      * @param bg данные для внесения изменений
      * @return настольная игра с обновленной информацией
      */
+    @TrackActionsWithBoardGames
     @Override
     public BoardGame editBoardGame(/*Long id,*/ BoardGame bg) {
         Optional<BoardGame> optionalBG = bgRepository.findById(bg.getId());
@@ -82,6 +85,7 @@ public class BoardGameServiceImpl implements BoardGameService {
     /**
      * Метод удаления настольной игры
      */
+    @TrackActionsWithBoardGames
     @Override
     public void deleteBoardGame(Long id) {
         bgRepository.deleteById(id);

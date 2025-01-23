@@ -197,23 +197,5 @@ public class BGWorldController {
 }
 
 
-//    /**
-//     * начальная страница
-//     */
-//    @GetMapping("/")
-//    public String homePage(Model model) {
-//        model.addAttribute("newUser", new User());
-//        return "home";
-//    }
 
-//    /**
-//     * Добавление пользователя
-//     * @param user новый пользователь
-//     * @return страница main
-//     */
-//    @PostMapping("/addUser")
-//    public String addUser(@ModelAttribute User user) {
-//        userService.addUser(user);
-//        return "redirect:/main";
-//    }
 
